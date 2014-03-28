@@ -1,9 +1,9 @@
 ///<reference path="references.ts" />
 
 module myApp {
-	var app = angular.module('packageNameApp', ['ui.router', 'templates-main']);
+	var app = angular.module('codeOverwatch', ['ui.router', 'templates-main', 'codeOverwatch.overview']);
 	app.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
-		$urlRouterProvider.otherwise('/state1');
+		$urlRouterProvider.otherwise('/');
 		$stateProvider
 			  .state('state1', {
 				url: '/state1',

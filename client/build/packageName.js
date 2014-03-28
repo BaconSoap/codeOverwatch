@@ -1,9 +1,20 @@
+var codeOverwatch;
+(function (codeOverwatch) {
+    var app = angular.module('codeOverwatch.overview', []);
+    app.config([
+        '$stateProvider', function ($stateProvider) {
+            $stateProvider.state('overview', {
+                url: '/',
+                templateUrl: 'templates/overview.tpl.html'
+            });
+        }]);
+})(codeOverwatch || (codeOverwatch = {}));
 var myApp;
 (function (myApp) {
-    var app = angular.module('packageNameApp', ['ui.router', 'templates-main']);
+    var app = angular.module('codeOverwatch', ['ui.router', 'templates-main', 'codeOverwatch.overview']);
     app.config([
         '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/state1');
+            $urlRouterProvider.otherwise('/');
             $stateProvider.state('state1', {
                 url: '/state1',
                 templateUrl: 'templates/state1.tpl.html'
@@ -14,14 +25,17 @@ var myApp;
         }]);
     myApp.a = 'apple';
 })(myApp || (myApp = {}));
-;angular.module('templates-main', ['templates/index.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+;angular.module('templates-main', ['templates/index.tpl.html', 'templates/overview.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
 
 angular.module("templates/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/index.tpl.html",
-    "<div ui-view></div>\n" +
-    "\n" +
-    "<a ui-sref=\"state1\">State 1</a>\n" +
-    "<a ui-sref=\"state2\">State 2</a>");
+    "<h2 class=\"sub-header\">Section title</h2>\n" +
+    "<div ui-view></div>");
+}]);
+
+angular.module("templates/overview.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/overview.tpl.html",
+    "overview!");
 }]);
 
 angular.module("templates/state1.tpl.html", []).run(["$templateCache", function($templateCache) {

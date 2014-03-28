@@ -1,5 +1,5 @@
 describe('this app', function () {
-    beforeEach(module('packageNameApp'));
+    beforeEach(module('codeOverwatch'));
     it('works', function () {
         expect(myApp.a).to.equal('apple');
     });

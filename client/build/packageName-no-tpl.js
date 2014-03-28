@@ -1,9 +1,20 @@
+var codeOverwatch;
+(function (codeOverwatch) {
+    var app = angular.module('codeOverwatch.overview', []);
+    app.config([
+        '$stateProvider', function ($stateProvider) {
+            $stateProvider.state('overview', {
+                url: '/',
+                templateUrl: 'templates/overview.tpl.html'
+            });
+        }]);
+})(codeOverwatch || (codeOverwatch = {}));
 var myApp;
 (function (myApp) {
-    var app = angular.module('packageNameApp', ['ui.router', 'templates-main']);
+    var app = angular.module('codeOverwatch', ['ui.router', 'templates-main', 'codeOverwatch.overview']);
     app.config([
         '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/state1');
+            $urlRouterProvider.otherwise('/');
             $stateProvider.state('state1', {
                 url: '/state1',
                 templateUrl: 'templates/state1.tpl.html'
