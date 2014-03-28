@@ -1,0 +1,23 @@
+{
+  "name": "generator-angular-typescript",
+  "version": "0.0.0",
+  "homepage": "https://github.com/BaconSoap/generator-angular-typescript",
+  "authors": [
+    "Andrew Varnerin <andrew@varnerin.info>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.15",
+    "angular-mocks": "1.2.15",
+    "angular-ui-router": "~0.2.10",
+    "bootstrap": "twbs/bootstrap#~3.1.1"
+  }
+}
