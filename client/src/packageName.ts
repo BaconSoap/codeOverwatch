@@ -1,7 +1,8 @@
 ///<reference path="references.ts" />
 
-module myApp {
-	var app = angular.module('codeOverwatch', ['ui.router', 'templates-main', 'codeOverwatch.overview']);
+module overwatch {
+	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
+	app.constant('versionNumber', '0.0.0');
 	app.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
@@ -13,5 +14,9 @@ module myApp {
 				templateUrl: 'templates/state2.tpl.html'
 			});
 	}]);
-	export var a = 'apple';
+
+	app.factory('viewModel', [() => {
+		var a = {pageTitle: ''};
+		return a;
+	}]);
 }

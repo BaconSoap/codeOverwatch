@@ -1,7 +1,7 @@
 ///<reference path="../references.ts" />
 
-module codeOverwatch {
-	var app = angular.module('codeOverwatch.overview', []);
+module overwatch {
+	var app = angular.module('overwatch.overview', []);
 	app.config(['$stateProvider', ($stateProvider) => {
 		$stateProvider
 			.state('overview', {

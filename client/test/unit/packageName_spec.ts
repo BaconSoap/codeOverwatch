@@ -1,8 +1,8 @@
 ///<reference path="../testReferences.ts" />
 
 describe('this app', () => {
-	beforeEach(module('codeOverwatch'));
-	it('works', () => {
-		expect(myApp.a).to.equal('apple');
-	});
+	beforeEach(module('overwatch'));
+	it('expect a version', inject((versionNumber) => {
+		expect(versionNumber).to.not.be.an('undefined');
+	}));
 });

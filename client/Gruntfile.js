@@ -88,7 +88,15 @@ module.exports = function(grunt) {
           "styles/main.css": "styles/main.scss"
         }
       }
-    }
+    },
+	connect: {
+		client: {
+			options: {
+				port: 8000,
+				base: './'
+			}
+		}
+	}
 
   });
 
@@ -96,6 +104,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('base', ['tslint', 'clean', 'mkdir', 'typescript', 'html2js', 'concat', 'uglify']);
   grunt.registerTask('default', ['base', 'karma:now', 'sass']);
-  grunt.registerTask('w', ['karma:unit', 'watch']);
+  grunt.registerTask('w', ['karma:unit', 'connect', 'watch']);
   grunt.registerTask('wt', ['karma:unit', 'watch:tests']);
 };

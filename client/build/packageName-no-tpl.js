@@ -1,6 +1,6 @@
-var codeOverwatch;
-(function (codeOverwatch) {
-    var app = angular.module('codeOverwatch.overview', []);
+var overwatch;
+(function (overwatch) {
+    var app = angular.module('overwatch.overview', []);
     app.config([
         '$stateProvider', function ($stateProvider) {
             $stateProvider.state('overview', {
@@ -8,10 +8,11 @@ var codeOverwatch;
                 templateUrl: 'templates/overview.tpl.html'
             });
         }]);
-})(codeOverwatch || (codeOverwatch = {}));
-var myApp;
-(function (myApp) {
-    var app = angular.module('codeOverwatch', ['ui.router', 'templates-main', 'codeOverwatch.overview']);
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
+    app.constant('versionNumber', '0.0.0');
     app.config([
         '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
@@ -23,5 +24,9 @@ var myApp;
                 templateUrl: 'templates/state2.tpl.html'
             });
         }]);
-    myApp.a = 'apple';
-})(myApp || (myApp = {}));
+
+    app.factory('viewModel', [function () {
+            var a = { pageTitle: '' };
+            return a;
+        }]);
+})(overwatch || (overwatch = {}));

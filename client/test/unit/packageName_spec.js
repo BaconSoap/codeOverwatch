@@ -1,6 +1,6 @@
 describe('this app', function () {
-    beforeEach(module('codeOverwatch'));
-    it('works', function () {
-        expect(myApp.a).to.equal('apple');
-    });
+    beforeEach(module('overwatch'));
+    it('expect a version', inject(function (versionNumber) {
+        expect(versionNumber).to.not.be.an('undefined');
+    }));
 });
