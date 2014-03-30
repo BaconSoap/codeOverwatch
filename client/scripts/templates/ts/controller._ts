@@ -1,15 +1,27 @@
 ///<reference path="../references.ts" />
 
 module {{moduleName}} {
-	module {{area}} {
-		var app = angular.module('{{moduleName}}.{{area}}', []);
-		app.controller('{{controllerName}}Ctrl', ['$scope', '$stateProvider', ($scope, $stateProvider) => {
-			$scope.viewModel = {};
+	export module {{area}} {
+		var app = angular.module('{{moduleName}}.{{area}}', ['ui.router']);
+
+		app.config(['$stateProvider', ($stateProvider: ng.ui.IStateProvider) => {
 			$stateProvider
 				.state('{{controllerName}}', {
 					url: '/URL',
-					templateUrl: 'templates/{{controllerName}}.tpl.html'
+					templateUrl: 'templates/{{area}}/{{controllerName}}Ctrl.tpl.html'
 				});
 		}]);
+
+		app.controller('{{controllerName}}Ctrl', ['$scope', ($scope: I{{uControllerName}}CtrlScope) => {
+			$scope.viewModel = {};
+		}]);
+
+		export interface I{{uControllerName}}CtrlScope {
+			viewModel: I{{uControllerName}}ViewModel;
+		}
+
+		export interface I{{uControllerName}}ViewModel {
+
+		}
 	}
 }

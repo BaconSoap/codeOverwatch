@@ -3,7 +3,8 @@
 module overwatch {
 	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
 	app.constant('versionNumber', '0.0.0');
-	app.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+	app.config(['$stateProvider', '$urlRouterProvider',
+			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
 			  .state('state1', {

@@ -1,0 +1,17 @@
+///<reference path="../../testReferences.ts" />
+
+describe('this controller', () => {
+	var ctrl;
+	var scope : {{moduleName}}.{{area}}.I{{uControllerName}}CtrlScope;
+	beforeEach(module('{{moduleName}}.{{area}}'));
+	beforeEach(() => {
+		inject(($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) => {
+			scope = <any>$rootScope.$new();
+			ctrl = $controller('{{controllerName}}Ctrl', {$scope: scope});
+		});
+	});
+
+	it('exists', () => {
+		expect(ctrl).to.not.be.an('undefined');
+	});
+});

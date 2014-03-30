@@ -2,14 +2,18 @@ var {{moduleName}};
 (function({{moduleName}}) {
 	var {{area}};
 	(function({{area}}) {
-		var app = angular.module('{{moduleName}}.{{area}}', []);
-		app.controller('{{controllerName}}Ctrl', ['$scope', '$stateProvider', function($scope, $stateProvider) {
-			$scope.viewModel = {};
+		var app = angular.module('{{moduleName}}.{{area}}', ['ui.router']);
+
+		app.config(['$stateProvider', function($stateProvider){
 			$stateProvider
 				.state('{{controllerName}}', {
 					url: '/URL',
-					templateUrl: 'templates/{{controllerName}}.tpl.html'
+					templateUrl: 'templates/{{area}}/{{controllerName}}Ctrl.tpl.html'
 				});
+		}]);
+
+		app.controller('{{controllerName}}Ctrl', ['$scope', function($scope) {
+			$scope.viewModel = {};
 		}]);
 	})({{area}} || ({{area}} = {}));
 })({{moduleName}} || ({{moduleName}} = {}));

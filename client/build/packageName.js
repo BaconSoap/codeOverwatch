@@ -1,23 +1,30 @@
 var overwatch;
 (function (overwatch) {
-    var overview;
     (function (overview) {
-        var app = angular.module('overwatch.overview', []);
+        var app = angular.module('overwatch.overview', ['ui.router']);
+
         app.config([
             '$stateProvider', function ($stateProvider) {
                 $stateProvider.state('overview', {
-                    url: '/',
-                    templateUrl: 'templates/overview.tpl.html'
+                    url: '/URL',
+                    templateUrl: 'templates/overview/overviewCtrl.tpl.html'
                 });
             }]);
-    })(overview || (overview = {}));
+
+        app.controller('overviewCtrl', [
+            '$scope', function ($scope) {
+                $scope.viewModel = {};
+            }]);
+    })(overwatch.overview || (overwatch.overview = {}));
+    var overview = overwatch.overview;
 })(overwatch || (overwatch = {}));
 var overwatch;
 (function (overwatch) {
     var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
     app.constant('versionNumber', '0.0.0');
     app.config([
-        '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        '$stateProvider', '$urlRouterProvider',
+        function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
             $stateProvider.state('state1', {
                 url: '/state1',
@@ -33,7 +40,7 @@ var overwatch;
             return a;
         }]);
 })(overwatch || (overwatch = {}));
-;angular.module('templates-main', ['templates/index.tpl.html', 'templates/overview.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+;angular.module('templates-main', ['templates/index.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
 
 angular.module("templates/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/index.tpl.html",
@@ -44,6 +51,13 @@ angular.module("templates/index.tpl.html", []).run(["$templateCache", function($
 angular.module("templates/overview.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/overview.tpl.html",
     "overview!");
+}]);
+
+angular.module("templates/overview/overviewCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/overview/overviewCtrl.tpl.html",
+    "<div data-ng-controller=\"overviewCtrl\">\n" +
+    "\n" +
+    "</div>");
 }]);
 
 angular.module("templates/state1.tpl.html", []).run(["$templateCache", function($templateCache) {

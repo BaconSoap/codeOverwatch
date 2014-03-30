@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/index.tpl.html', 'templates/overview.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+angular.module('templates-main', ['templates/index.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
 
 angular.module("templates/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/index.tpl.html",
@@ -9,6 +9,13 @@ angular.module("templates/index.tpl.html", []).run(["$templateCache", function($
 angular.module("templates/overview.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/overview.tpl.html",
     "overview!");
+}]);
+
+angular.module("templates/overview/overviewCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/overview/overviewCtrl.tpl.html",
+    "<div data-ng-controller=\"overviewCtrl\">\n" +
+    "\n" +
+    "</div>");
 }]);
 
 angular.module("templates/state1.tpl.html", []).run(["$templateCache", function($templateCache) {

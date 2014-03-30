@@ -1,23 +1,30 @@
 var overwatch;
 (function (overwatch) {
-    var overview;
     (function (overview) {
-        var app = angular.module('overwatch.overview', []);
+        var app = angular.module('overwatch.overview', ['ui.router']);
+
         app.config([
             '$stateProvider', function ($stateProvider) {
                 $stateProvider.state('overview', {
-                    url: '/',
-                    templateUrl: 'templates/overview.tpl.html'
+                    url: '/URL',
+                    templateUrl: 'templates/overview/overviewCtrl.tpl.html'
                 });
             }]);
-    })(overview || (overview = {}));
+
+        app.controller('overviewCtrl', [
+            '$scope', function ($scope) {
+                $scope.viewModel = {};
+            }]);
+    })(overwatch.overview || (overwatch.overview = {}));
+    var overview = overwatch.overview;
 })(overwatch || (overwatch = {}));
 var overwatch;
 (function (overwatch) {
     var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
     app.constant('versionNumber', '0.0.0');
     app.config([
-        '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        '$stateProvider', '$urlRouterProvider',
+        function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/');
             $stateProvider.state('state1', {
                 url: '/state1',
