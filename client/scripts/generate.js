@@ -1,4 +1,4 @@
-//used to generate services, controllers, etc
+//used to generate services, controllers, etc. for an angularjs application
 
 var argv = require('yargs').boolean('j').boolean('js').argv;
 var handlebars = require('handlebars');
@@ -15,6 +15,7 @@ var moduleName = argv.m;
 
 bindAndRunGenerator('a', 'area', 2, createArea);
 bindAndRunGenerator('c', 'controller', 2, createController, true);
+bindAndRunGenerator('v', 'view', 2, createView)
 
 //generators
 
@@ -48,6 +49,11 @@ function createController(fullName) {
 	addReference(fullName + 'Ctrl.ts');
 }
 
+/**
+ * create a view file
+ * @param fullName the full name of the controller in the form of area/controllerName
+ * @param type if specified, will be used to grab the subtype of that view
+ */
 function createView(fullName, type) {
 	if (typeof type === 'undefined') {
 		type = '';
