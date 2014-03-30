@@ -7,7 +7,8 @@ var fs = require('fs');
 //globals
 
 var _isJs = argv.j || argv.js;
-var baseTemplatePath = 'templates/' + (_isJs? 'js': 'ts') + '/';
+var scriptSuffix = (_isJs? 'js': 'ts');
+var baseTemplatePath = 'templates/' + scriptSuffix + '/';
 var moduleName = argv.m;
 
 //bindings
@@ -31,10 +32,10 @@ function createController(fullName) {
 
 	var area = paths[0];
 	var name = paths[1].replace('Ctrl', '').replace('ctrl', '');
-	var context = {moduleName: moduleName, controllerName: name};
+	var context = {moduleName: moduleName, area: area, controllerName: name};
 	createArea(area);
-	parseTemplate('controller', _srcp(area), context);
-	parseTemplate('controllerView', _viewp(area), context)
+	parseTemplate('controller._' + scriptSuffix, _srcp(area) + name + 'Ctrl.' + scriptSuffix, context);
+	//parseTemplate('controllerView._' + scriptSuffix, _viewp(area), context)
 }
 
 
@@ -81,6 +82,41 @@ function bindAndRunGenerator(short, long, argMin, fn, checkModuleName) {
 	}
 }
 
-function parseTemplate(templateName, destPath, context) {
+/**
+ * die if the item specified does not exist
+ * @param path
+ */
+function fatalShouldExist(path) {
+	if (!fs.existsSync(path)) {
+		die('expected item "' + path.replace('../', '') + '" to exist, but it didn\'t');
+	}
+}
 
+/**
+ * die if the item specified exists
+ * @param path
+ */
+function fatalShouldNotExist(path) {
+	if (fs.existsSync(path)) {
+		die('expected item "' + path.replace('../', '') + '" to not exist, but it did');
+	}
+}
+
+/**
+ * compile a template with the given context and write the results to a file
+ * @param templateName the name of the template, excluding base path but including extension
+ * @param destPath the file to write to
+ * @param context the variables to inject into the template's scope
+ */
+function parseTemplate(templateName, destPath, context) {
+	var srcPath = baseTemplatePath + templateName;
+	fatalShouldExist(srcPath);
+	fatalShouldNotExist(destPath);
+	var contents = fs.readFileSync(srcPath, 'utf8');
+	var compiled = handlebars.compile(contents)(context);
+	try {
+		fs.writeFileSync(destPath, compiled, 'utf8');
+	} catch (e) {
+		die('fatal error when trying to write file at "' + destPath + '"');
+	}
 }

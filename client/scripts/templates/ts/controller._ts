@@ -1,0 +1,15 @@
+///<reference path="../references.ts" />
+
+module {{moduleName}} {
+	module {{area}} {
+		var app = angular.module('{{moduleName}}.{{area}}', []);
+		app.controller('{{controllerName}}Ctrl', ['$scope', '$stateProvider', ($scope, $stateProvider) => {
+			$scope.viewModel = {};
+			$stateProvider
+				.state('{{controllerName}}', {
+					url: '/URL',
+					templateUrl: 'templates/{{controllerName}}.tpl.html'
+				});
+		}]);
+	}
+}

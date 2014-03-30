@@ -1,13 +1,16 @@
 var overwatch;
 (function (overwatch) {
-    var app = angular.module('overwatch.overview', []);
-    app.config([
-        '$stateProvider', function ($stateProvider) {
-            $stateProvider.state('overview', {
-                url: '/',
-                templateUrl: 'templates/overview.tpl.html'
-            });
-        }]);
+    var overview;
+    (function (overview) {
+        var app = angular.module('overwatch.overview', []);
+        app.config([
+            '$stateProvider', function ($stateProvider) {
+                $stateProvider.state('overview', {
+                    url: '/',
+                    templateUrl: 'templates/overview.tpl.html'
+                });
+            }]);
+    })(overview || (overview = {}));
 })(overwatch || (overwatch = {}));
 var overwatch;
 (function (overwatch) {
