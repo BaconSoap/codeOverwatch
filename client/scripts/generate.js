@@ -16,6 +16,7 @@ var moduleName = argv.m;
 bindAndRunGenerator('a', 'area', 2, createArea);
 bindAndRunGenerator('c', 'controller', 2, createController, true);
 bindAndRunGenerator('v', 'view', 2, createView)
+bindAndRunGenerator('s', 'service', 2, createService, true);
 
 //generators
 
@@ -47,6 +48,22 @@ function createController(fullName) {
 	createView(fullName + 'Ctrl', 'ctrl');
 	parseTemplate('controller_spec._' + scriptSuffix, _testp(area) + name + 'Ctrl_spec.' + scriptSuffix, context);
 	addReference(fullName + 'Ctrl.ts');
+	console.info('remember to add "' + moduleName + '.' + area + '" to your angular.module dependencies');
+}
+
+function createService(fullName) {
+	var paths = fullName.split('/');
+	if (paths.length < 2 || typeof paths[1] === 'undefined' || paths[1].length === 0) {
+		die('serice area/name is not fully specified. you should pass it in the form area/serviceName');
+	}
+
+	var area = paths[0];
+	var name = paths[1].replace('Service', '');
+	var context = {moduleName: moduleName, area: area, serviceName: name, uServiceName: capitaliseFirstLetter(name)};
+	createArea(area);
+	parseTemplate('service._' + scriptSuffix, _srcp(area) + name + 'Service.' + scriptSuffix, context);
+	addReference(area + '/' + name + 'Service.ts');
+	parseTemplate('service_spec._' + scriptSuffix, _testp(area) + name + 'Service_spec.' + scriptSuffix, context);
 }
 
 /**

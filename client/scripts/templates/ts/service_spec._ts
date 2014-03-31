@@ -1,0 +1,20 @@
+///<reference path="../../testReferences.ts" />
+
+describe('this service', () => {
+	var service: {{moduleName}}.{{area}}.I{{uServiceName}}Service;
+
+	beforeEach(module('{{moduleName}}.{{area}}.{{serviceName}}Service'));
+	beforeEach(() => {
+		inject(({{serviceName}}Service) => {
+			service = {{serviceName}}Service;
+		});
+	});
+
+	it('exists', () => {
+		expect(service).to.not.be.an('undefined');
+	});
+
+	it('exposes the data', () => {
+		expect(service.data).to.not.be.an('undefined');
+	});
+});
