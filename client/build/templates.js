@@ -66,7 +66,7 @@ angular.module("templates/overview.tpl.html", []).run(["$templateCache", functio
 angular.module("templates/overview/overviewCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/overview/overviewCtrl.tpl.html",
     "<div data-ng-controller=\"overviewCtrl\">\n" +
-    "\n" +
+    "	this is the overview right in here\n" +
     "</div>");
 }]);
 

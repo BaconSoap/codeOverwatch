@@ -1,19 +1,22 @@
 var overwatch;
 (function (overwatch) {
     (function (overview) {
-        var app = angular.module('overwatch.overview', ['ui.router']);
+        var app = angular.module('overwatch.overview', ['ui.router', 'overwatch.layout.pageDataService']);
 
         app.config([
             '$stateProvider', function ($stateProvider) {
+                console.log('config overview');
                 $stateProvider.state('overview', {
-                    url: '/',
+                    url: '/overview',
                     templateUrl: 'templates/overview/overviewCtrl.tpl.html'
                 });
             }]);
 
         app.controller('overviewCtrl', [
-            '$scope', function ($scope) {
+            '$scope', 'pageDataService',
+            function ($scope, pageDataService) {
                 $scope.viewModel = {};
+                pageDataService.currentPageData.pageTitle = 'Overiview';
             }]);
     })(overwatch.overview || (overwatch.overview = {}));
     var overview = overwatch.overview;
@@ -21,11 +24,13 @@ var overwatch;
 var overwatch;
 (function (overwatch) {
     (function (layout) {
-        var app = angular.module('overwatch.layout', ['ui.router']);
+        var app = angular.module('overwatch.layout', ['ui.router', 'overwatch.layout.pageDataService']);
 
         app.controller('pageLayoutCtrl', [
-            '$scope', function ($scope) {
+            '$scope', 'pageDataService',
+            function ($scope, pageDataService) {
                 $scope.viewModel = {};
+                $scope.viewModel.pageData = pageDataService.currentPageData;
             }]);
     })(overwatch.layout || (overwatch.layout = {}));
     var layout = overwatch.layout;
@@ -37,8 +42,11 @@ var overwatch;
 
         app.factory('pageDataService', [function () {
                 var service = {
-                    data: ''
+                    currentPageData: {
+                        pageTitle: ''
+                    }
                 };
+
                 return service;
             }]);
     })(overwatch.layout || (overwatch.layout = {}));
@@ -51,7 +59,9 @@ var overwatch;
     app.config([
         '$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider.otherwise('/');
+            console.log('config base');
+
+            $urlRouterProvider.otherwise('/overview');
             $stateProvider.state('state1', {
                 url: '/state1',
                 templateUrl: 'templates/state1.tpl.html'

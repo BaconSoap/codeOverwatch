@@ -16,13 +16,17 @@ declare module overwatch {
             viewModel: IPageLayoutViewModel;
         }
         interface IPageLayoutViewModel {
+            pageData: ICurrentPageData;
         }
     }
 }
 declare module overwatch {
     module layout {
         interface IPageDataService {
-            data: any;
+            currentPageData: ICurrentPageData;
+        }
+        interface ICurrentPageData {
+            pageTitle: string;
         }
     }
 }

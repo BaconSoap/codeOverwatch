@@ -12,7 +12,7 @@ describe('this service', function () {
         expect(service).to.not.be.an('undefined');
     });
 
-    it('exposes the data', function () {
-        expect(service.data).to.not.be.an('undefined');
+    it('exposes current page data', function () {
+        expect(service.currentPageData).to.not.be.an('undefined');
     });
 });

@@ -14,7 +14,7 @@ describe('this service', () => {
 		expect(service).to.not.be.an('undefined');
 	});
 
-	it('exposes the data', () => {
-		expect(service.data).to.not.be.an('undefined');
+	it('exposes current page data', () => {
+		expect(service.currentPageData).to.not.be.an('undefined');
 	});
 });

@@ -5,7 +5,9 @@ module overwatch {
 	app.constant('versionNumber', '0.0.0');
 	app.config(['$stateProvider', '$urlRouterProvider',
 			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
-		$urlRouterProvider.otherwise('/');
+		console.log('config base');
+
+		$urlRouterProvider.otherwise('/overview');
 		$stateProvider
 			  .state('state1', {
 				url: '/state1',

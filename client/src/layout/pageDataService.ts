@@ -6,13 +6,20 @@ module overwatch {
 
 		app.factory('pageDataService', [(): IPageDataService => {
 			var service: IPageDataService = {
-				data: ''
+				currentPageData: {
+					pageTitle: ''
+				}
 			};
+
 			return service;
 		}]);
 
 		export interface IPageDataService {
-			data: any;
+			currentPageData: ICurrentPageData;
+		}
+
+		export interface ICurrentPageData {
+			pageTitle: string;
 		}
 	}
 }
