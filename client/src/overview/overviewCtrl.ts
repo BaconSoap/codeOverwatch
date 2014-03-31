@@ -7,7 +7,7 @@ module overwatch {
 		app.config(['$stateProvider', ($stateProvider: ng.ui.IStateProvider) => {
 			$stateProvider
 				.state('overview', {
-					url: '/URL',
+					url: '/',
 					templateUrl: 'templates/overview/overviewCtrl.tpl.html'
 				});
 		}]);

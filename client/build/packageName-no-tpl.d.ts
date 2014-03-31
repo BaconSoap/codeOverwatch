@@ -11,4 +11,20 @@ declare module overwatch {
     }
 }
 declare module overwatch {
+    module layout {
+        interface IPageLayoutCtrlScope {
+            viewModel: IPageLayoutViewModel;
+        }
+        interface IPageLayoutViewModel {
+        }
+    }
+}
+declare module overwatch {
+    module layout {
+        interface IPageDataService {
+            data: any;
+        }
+    }
+}
+declare module overwatch {
 }

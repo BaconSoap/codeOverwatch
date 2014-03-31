@@ -6,7 +6,7 @@ var overwatch;
         app.config([
             '$stateProvider', function ($stateProvider) {
                 $stateProvider.state('overview', {
-                    url: '/URL',
+                    url: '/',
                     templateUrl: 'templates/overview/overviewCtrl.tpl.html'
                 });
             }]);
@@ -20,7 +20,33 @@ var overwatch;
 })(overwatch || (overwatch = {}));
 var overwatch;
 (function (overwatch) {
-    var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
+    (function (layout) {
+        var app = angular.module('overwatch.layout', ['ui.router']);
+
+        app.controller('pageLayoutCtrl', [
+            '$scope', function ($scope) {
+                $scope.viewModel = {};
+            }]);
+    })(overwatch.layout || (overwatch.layout = {}));
+    var layout = overwatch.layout;
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    (function (layout) {
+        var app = angular.module('overwatch.layout.pageDataService', []);
+
+        app.factory('pageDataService', [function () {
+                var service = {
+                    data: ''
+                };
+                return service;
+            }]);
+    })(overwatch.layout || (overwatch.layout = {}));
+    var layout = overwatch.layout;
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
     app.constant('versionNumber', '0.0.0');
     app.config([
         '$stateProvider', '$urlRouterProvider',

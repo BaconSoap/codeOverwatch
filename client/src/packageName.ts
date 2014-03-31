@@ -1,7 +1,7 @@
 ///<reference path="references.ts" />
 
 module overwatch {
-	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview']);
+	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
 	app.constant('versionNumber', '0.0.0');
 	app.config(['$stateProvider', '$urlRouterProvider',
 			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
