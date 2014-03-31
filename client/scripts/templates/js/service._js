@@ -2,9 +2,9 @@ var {{moduleName}};
 (function({{moduleName}}) {
 	var {{area}};
 	(function({{area}}) {
-		var app = angular.module('{{moduleName}}.{{area}}', []);
+		var app = angular.module('{{moduleName}}.{{area}}.{{serviceName}}Service', []);
 
-		app.controller('{{serviceName}}Service', [function() {
+		app.factory('{{serviceName}}Service', [function() {
 			var service = {
 				data: ''
 			};
