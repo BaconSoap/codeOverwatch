@@ -28,3 +28,7 @@ in server, do
 ```bash
 ./runServer
 ```
+
+## LICENSE
+
+MIT License
