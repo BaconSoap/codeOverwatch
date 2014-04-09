@@ -15,6 +15,8 @@ then go config it.
 
 move config.json to secrets/config.json and populate it with your info
 
+The owner is the org/user that owns the repo. Get a key by going to your github account, then applications, then generate new personal access token.
+
 ##edit/run
 
 in client, do
