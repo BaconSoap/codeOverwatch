@@ -5,3 +5,7 @@
 ///<reference path="overview/overviewCtrl.ts" />
 ///<reference path="layout/pageLayoutCtrl.ts" />
 ///<reference path="layout/pageDataService.ts" />
+
+///<reference path="git/branchesService.ts" />
+
+///<reference path="git/branchesCtrl.ts" />

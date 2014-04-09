@@ -1,4 +1,15 @@
-angular.module('templates-main', ['templates/index.tpl.html', 'templates/layout/header.tpl.html', 'templates/layout/sidebar.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+angular.module('templates-main', ['templates/git/branchesCtrl.tpl.html', 'templates/index.tpl.html', 'templates/layout/header.tpl.html', 'templates/layout/sidebar.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+
+angular.module("templates/git/branchesCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/git/branchesCtrl.tpl.html",
+    "<div data-ng-controller=\"branchesCtrl\">\n" +
+    "	<ul>\n" +
+    "		<li ng-repeat=\"branch in viewModel.branches\">\n" +
+    "			{{branch.name}}\n" +
+    "		</li>\n" +
+    "	</ul>\n" +
+    "</div>");
+}]);
 
 angular.module("templates/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/index.tpl.html",
@@ -39,8 +50,7 @@ angular.module("templates/layout/sidebar.tpl.html", []).run(["$templateCache", f
     "<div class=\"col-sm-3 col-md-2 sidebar\">\n" +
     "	<ul class=\"nav nav-sidebar\">\n" +
     "		<li><a href=\"#\" ui-sref=\"overview\">Overview</a></li>\n" +
-    "		<li><a href=\"#\" ui-sref=\"state1\">State 1</a></li>\n" +
-    "		<li><a href=\"#\" ui-sref=\"state2\">State 2</a></li>\n" +
+    "		<li><a href=\"#\" ui-sref=\"branches\">All Branches</a></li>\n" +
     "		<li><a href=\"#\">Export</a></li>\n" +
     "	</ul>\n" +
     "	<ul class=\"nav nav-sidebar\">\n" +

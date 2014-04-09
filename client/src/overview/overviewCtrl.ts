@@ -17,7 +17,7 @@ module overwatch {
 					  ['$scope', 'pageDataService',
 			 		   ($scope: IOverviewCtrlScope, pageDataService: layout.IPageDataService) => {
 			$scope.viewModel = {};
-			pageDataService.currentPageData.pageTitle = 'Overiview';
+			pageDataService.currentPageData.pageTitle = 'Overview';
 		}]);
 
 		export interface IOverviewCtrlScope {

@@ -20,7 +20,7 @@ var overwatch;
             '$scope', 'pageDataService',
             function ($scope, pageDataService) {
                 $scope.viewModel = {};
-                pageDataService.currentPageData.pageTitle = 'Overiview';
+                pageDataService.currentPageData.pageTitle = 'Overview';
             }]);
     })(overwatch.overview || (overwatch.overview = {}));
     var overview = overwatch.overview;
@@ -58,7 +58,53 @@ var overwatch;
 })(overwatch || (overwatch = {}));
 var overwatch;
 (function (overwatch) {
-    var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
+    (function (git) {
+        var app = angular.module('overwatch.git.branchesService', []);
+
+        app.factory('branchesService', [
+            '$http', function ($http) {
+                function getBranches() {
+                    return $http.get('/api/branches').then(function (branches) {
+                        return branches.data;
+                    });
+                }
+                var service = {
+                    getBranches: getBranches
+                };
+                return service;
+            }]);
+    })(overwatch.git || (overwatch.git = {}));
+    var git = overwatch.git;
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    (function (git) {
+        var app = angular.module('overwatch.git', ['ui.router', 'overwatch.git.branchesService']);
+
+        app.config([
+            '$stateProvider', function ($stateProvider) {
+                $stateProvider.state('branches', {
+                    url: '/branches',
+                    templateUrl: 'templates/git/branchesCtrl.tpl.html'
+                });
+            }]);
+
+        app.controller('branchesCtrl', [
+            '$scope', 'branchesService',
+            function ($scope, branchesService) {
+                $scope.viewModel = {};
+                branchesService.getBranches().then(function (branches) {
+                    $scope.viewModel.branches = branches;
+                });
+            }]);
+    })(overwatch.git || (overwatch.git = {}));
+    var git = overwatch.git;
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    var app = angular.module('overwatch', [
+        'ui.router', 'templates-main', 'overwatch.overview',
+        'overwatch.git', 'overwatch.layout']);
     app.constant('versionNumber', '0.0.0');
     app.config([
         '$stateProvider', '$urlRouterProvider', '$locationProvider',
@@ -76,13 +122,12 @@ var overwatch;
             });
         }]);
 
-    app.run([
-        '$state', function ($state) {
-            angular.noop($state);
+    app.run(['$state', function ($state) {
+            return angular.noop($state);
         }]);
 
     app.factory('viewModel', [function () {
-            var a = { pageTitle: '' };
+            var a = { pageTitle: 'The pagetitle should be changed for this state' };
             return a;
         }]);
 })(overwatch || (overwatch = {}));

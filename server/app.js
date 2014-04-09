@@ -35,7 +35,7 @@ var github = new GitHubApi({
     timeout: 5000
 });
 
-app.get('/branches', function (req, res) {
+app.get('/api/branches', function (req, res) {
 	githubAuth();
 	github.repos.getBranches({user:config.owner, repo:config.repo, per_page:100}, function(err,data){
 		console.info(data.length);
@@ -43,7 +43,7 @@ app.get('/branches', function (req, res) {
 	});
 });
 
-app.get('/branch/:branch', function (req, res) {
+app.get('/api/branch/:branch', function (req, res) {
 	var branchName = req.params.branch;
 	githubAuth();
 	github.repos.getBranch({user:config.owner, repo:config.repo, branch:branchName, per_page:100}, function(err,data){
@@ -52,7 +52,7 @@ app.get('/branch/:branch', function (req, res) {
 	});
 });
 
-app.get('/branch/:branch', function (req, res) {
+app.get('/api/branch/:branch', function (req, res) {
 	var branchName = req.params.branch;
 	githubAuth();
 	github.repos.getBranch({user:config.owner, repo:config.repo, branch:branchName, per_page:100}, function(err,data){
@@ -67,7 +67,7 @@ function githubAuth() {
 		token: config.api_key
 	});
 }
-app.get('/branch/:branch/commits', function (req, res) {
+app.get('/api/branch/:branch/commits', function (req, res) {
 	var branchName = req.params.branch;
 	var routeOptions = {user: config.owner, repo: config.repo, sha: branchName, per_page: 100};
 

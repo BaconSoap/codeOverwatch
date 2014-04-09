@@ -1,7 +1,8 @@
 ///<reference path="references.ts" />
 
 module overwatch {
-	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
+	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview',
+		'overwatch.git', 'overwatch.layout']);
 	app.constant('versionNumber', '0.0.0');
 	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider,
@@ -20,12 +21,11 @@ module overwatch {
 			});
 	}]);
 
-	app.run(['$state', ($state) => {
-		angular.noop($state);
-	}]);
+	//hack to make ui-view work when it is ng-included
+	app.run(['$state', ($state) => angular.noop($state)]);
 
 	app.factory('viewModel', [() => {
-		var a = {pageTitle: ''};
+		var a = {pageTitle: 'The pagetitle should be changed for this state'};
 		return a;
 	}]);
 }

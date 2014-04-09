@@ -33,4 +33,23 @@ declare module overwatch {
     }
 }
 declare module overwatch {
+    module git {
+        interface IBranch {
+        }
+        interface IBranchesService {
+            getBranches: () => ng.IPromise<IBranch[]>;
+        }
+    }
+}
+declare module overwatch {
+    module git {
+        interface IBranchesCtrlScope {
+            viewModel: IBranchesViewModel;
+        }
+        interface IBranchesViewModel {
+            branches: IBranch[];
+        }
+    }
+}
+declare module overwatch {
 }
