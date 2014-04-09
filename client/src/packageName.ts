@@ -3,9 +3,11 @@
 module overwatch {
 	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
 	app.constant('versionNumber', '0.0.0');
-	app.config(['$stateProvider', '$urlRouterProvider',
-			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
+	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider,
+				 $locationProvider: ng.ILocationProvider) => {
 		console.log('config base');
+		$locationProvider.html5Mode(true);
 
 		$urlRouterProvider.otherwise('/overview');
 		$stateProvider
@@ -16,6 +18,10 @@ module overwatch {
 				url: '/state2',
 				templateUrl: 'templates/state2.tpl.html'
 			});
+	}]);
+
+	app.run(['$state', ($state) => {
+		angular.noop($state);
 	}]);
 
 	app.factory('viewModel', [() => {

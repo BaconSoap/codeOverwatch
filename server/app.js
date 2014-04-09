@@ -14,7 +14,11 @@ app.set('port', process.env.PORT || 1337);
 app.set('views', __dirname + '/views');
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, '../client/')));
+app.use('/scripts', express.static(path.join(__dirname, '../client/scripts')));
+app.use('/build', express.static(path.join(__dirname, '../client/build')));
+app.use('/bower_components', express.static(path.join(__dirname, '../client/bower_components')));
+app.use('/styles', express.static(path.join(__dirname, '../client/styles')));
+app.use('/templates', express.static(path.join(__dirname, '../client/templates')));
 app.use(app.router);
 
 
@@ -76,6 +80,11 @@ app.get('/branch/:branch/commits', function (req, res) {
 		console.info(data.length);
 		res.json(data);
 	});
+});
+
+app.all('/*', function(req, res, next) {
+	// Just send the index.html for other files to support HTML5Mode
+	res.sendfile('index.html', { root: __dirname + "/../client/" });
 });
 
 http.createServer(app).listen(app.get('port'), function () {

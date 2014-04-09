@@ -1,6 +1,6 @@
 ///<reference path="references.ts" />
 
 module overwatch {
-	var app = angular.module('overwatch');
+	var app = angular.module('overwatch.conf', []);
 
 }

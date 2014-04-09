@@ -1,5 +1,9 @@
 var overwatch;
 (function (overwatch) {
+    var app = angular.module('overwatch.conf', []);
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
     (function (overview) {
         var app = angular.module('overwatch.overview', ['ui.router', 'overwatch.layout.pageDataService']);
 
@@ -57,9 +61,10 @@ var overwatch;
     var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview', 'overwatch.layout']);
     app.constant('versionNumber', '0.0.0');
     app.config([
-        '$stateProvider', '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+        '$stateProvider', '$urlRouterProvider', '$locationProvider',
+        function ($stateProvider, $urlRouterProvider, $locationProvider) {
             console.log('config base');
+            $locationProvider.html5Mode(true);
 
             $urlRouterProvider.otherwise('/overview');
             $stateProvider.state('state1', {
@@ -69,6 +74,11 @@ var overwatch;
                 url: '/state2',
                 templateUrl: 'templates/state2.tpl.html'
             });
+        }]);
+
+    app.run([
+        '$state', function ($state) {
+            angular.noop($state);
         }]);
 
     app.factory('viewModel', [function () {
