@@ -206,7 +206,7 @@ angular.module("templates/git/branchCtrl.tpl.html", []).run(["$templateCache", f
     "\n" +
     "	<input type=\"text\" id=\"forUser\" name=\"forUser\" ng-model=\"viewModel.username\" size=\"50\"> <button ng-click=\"filterCommits()\">Filter</button>\n" +
     "	<ul>\n" +
-    "		<li ng-repeat=\"commit in commits\">{{commit.commit.message}}</li>\n" +
+    "		<li ng-repeat=\"commit in commits\"><a href=\"{{commit.htmlUrl}}\">{{commit.commit.message}}</a></li>\n" +
     "	</ul>\n" +
     "</div>");
 }]);

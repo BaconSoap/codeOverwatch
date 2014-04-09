@@ -78,6 +78,9 @@ app.get('/api/branch/:branch/commits', function (req, res) {
 	githubAuth();
 	github.repos.getCommits(routeOptions, function(err,data){
 		console.info(data.length);
+		for (var i = 0; i < data.length; i++){
+			data[i].htmlUrl = 'https://github.com/' + config.owner + '/' + config.repo + '/commit/' + data[i].sha;
+		}
 		res.json(data);
 	});
 });
