@@ -64,12 +64,35 @@ var overwatch;
         app.factory('branchesService', [
             '$http', function ($http) {
                 function getBranches() {
-                    return $http.get('/api/branches').then(function (branches) {
+                    return $http.get('/api/branches', { cache: true }).then(function (branches) {
                         return branches.data;
+                    }).then(function (branches) {
+                        for (var i = 0; i < branches.length; i++) {
+                            branches[i].urlName = branches[i].name.replace('/', '%2F');
+                        }
+                        return branches;
                     });
                 }
+
+                function getBranchInfo(branchName) {
+                    return $http.get('/api/branch/' + branchName, { cache: true }).then(function (branch) {
+                        return branch.data;
+                    }).then(function (branch) {
+                        branch.urlName = branch.name.replace('/', '%2F');
+                        return branch;
+                    });
+                }
+
+                function getCommits(branchName, userName) {
+                    return $http.get('/api/branch/' + branchName + '/commits?author=' + userName, { cache: true }).then(function (commits) {
+                        return commits.data;
+                    });
+                }
+
                 var service = {
-                    getBranches: getBranches
+                    getBranches: getBranches,
+                    getBranchInfo: getBranchInfo,
+                    getCommits: getCommits
                 };
                 return service;
             }]);
@@ -79,23 +102,63 @@ var overwatch;
 var overwatch;
 (function (overwatch) {
     (function (git) {
-        var app = angular.module('overwatch.git', ['ui.router', 'overwatch.git.branchesService']);
+        var app = angular.module('overwatch.git.branches', ['ui.router', 'overwatch.git.branchesService']);
 
         app.config([
             '$stateProvider', function ($stateProvider) {
                 $stateProvider.state('branches', {
                     url: '/branches',
-                    templateUrl: 'templates/git/branchesCtrl.tpl.html'
+                    templateUrl: 'templates/git/branchesCtrl.tpl.html',
+                    resolve: {
+                        branches: ['branchesService', function (branchesService) {
+                                return branchesService.getBranches();
+                            }]
+                    },
+                    controller: 'branchesCtrl'
                 });
             }]);
 
         app.controller('branchesCtrl', [
-            '$scope', 'branchesService',
-            function ($scope, branchesService) {
+            '$scope', 'branches',
+            function ($scope, branches) {
                 $scope.viewModel = {};
-                branchesService.getBranches().then(function (branches) {
-                    $scope.viewModel.branches = branches;
+                $scope.viewModel.branches = branches;
+            }]);
+    })(overwatch.git || (overwatch.git = {}));
+    var git = overwatch.git;
+})(overwatch || (overwatch = {}));
+var overwatch;
+(function (overwatch) {
+    (function (git) {
+        var app = angular.module('overwatch.git.branch', ['ui.router', 'overwatch.git.branchesService', 'overwatch.layout.pageDataService']);
+
+        app.config([
+            '$stateProvider',
+            function ($stateProvider) {
+                $stateProvider.state('branch', {
+                    url: '/branch/:branchName',
+                    templateUrl: 'templates/git/branchCtrl.tpl.html',
+                    resolve: {
+                        branchInfo: [
+                            '$stateParams', 'branchesService', function ($stateParams, branchesService) {
+                                return branchesService.getBranchInfo($stateParams.branchName);
+                            }]
+                    },
+                    controller: 'branchCtrl'
                 });
+            }]);
+
+        app.controller('branchCtrl', [
+            '$scope', '$stateParams', 'pageDataService', 'branchInfo', 'branchesService',
+            function ($scope, $stateParams, pageDataService, branchInfo, branchesService) {
+                $scope.viewModel = {};
+                $scope.viewModel.branch = branchInfo;
+                pageDataService.currentPageData.pageTitle = branchInfo.name;
+                $scope.filterCommits = function () {
+                    branchesService.getCommits(branchInfo.urlName, $scope.viewModel.username).then(function (commits) {
+                        $scope.commits = commits;
+                    });
+                };
             }]);
     })(overwatch.git || (overwatch.git = {}));
     var git = overwatch.git;
@@ -104,7 +167,7 @@ var overwatch;
 (function (overwatch) {
     var app = angular.module('overwatch', [
         'ui.router', 'templates-main', 'overwatch.overview',
-        'overwatch.git', 'overwatch.layout']);
+        'overwatch.git.branch', 'overwatch.git.branches', 'overwatch.layout']);
     app.constant('versionNumber', '0.0.0');
     app.config([
         '$stateProvider', '$urlRouterProvider', '$locationProvider',

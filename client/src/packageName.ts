@@ -2,7 +2,7 @@
 
 module overwatch {
 	var app = angular.module('overwatch', ['ui.router', 'templates-main', 'overwatch.overview',
-		'overwatch.git', 'overwatch.layout']);
+		'overwatch.git.branch', 'overwatch.git.branches', 'overwatch.layout']);
 	app.constant('versionNumber', '0.0.0');
 	app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
 			    ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider,

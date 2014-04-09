@@ -1,0 +1,11 @@
+<div>
+	View <a href="{{viewModel.branch._links.html}}">{{viewModel.branch.name}}</a> on Github <br/>
+	<label for="forUser">
+		Filter by user:
+	</label>
+
+	<input type="text" id="forUser" name="forUser" ng-model="viewModel.username" size="50"> <button ng-click="filterCommits()">Filter</button>
+	<ul>
+		<li ng-repeat="commit in commits">{{commit.commit.message}}</li>
+	</ul>
+</div>

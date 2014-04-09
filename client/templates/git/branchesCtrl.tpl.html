@@ -1,7 +1,7 @@
-<div data-ng-controller="branchesCtrl">
+<div>
 	<ul>
 		<li ng-repeat="branch in viewModel.branches">
-			{{branch.name}}
+			<a ui-sref="branch({branchName: branch.urlName})">{{branch.name}}</a>
 		</li>
 	</ul>
 </div>

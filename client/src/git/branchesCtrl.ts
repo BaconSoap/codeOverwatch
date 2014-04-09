@@ -2,22 +2,24 @@
 
 module overwatch {
 	export module git {
-		var app = angular.module('overwatch.git', ['ui.router', 'overwatch.git.branchesService']);
+		var app = angular.module('overwatch.git.branches', ['ui.router', 'overwatch.git.branchesService']);
 
 		app.config(['$stateProvider', ($stateProvider: ng.ui.IStateProvider) => {
 			$stateProvider
 				.state('branches', {
 					url: '/branches',
-					templateUrl: 'templates/git/branchesCtrl.tpl.html'
+					templateUrl: 'templates/git/branchesCtrl.tpl.html',
+					resolve: {
+						branches: ['branchesService', (branchesService) => branchesService.getBranches()]
+					},
+					controller: 'branchesCtrl'
 				});
 		}]);
 
-		app.controller('branchesCtrl', ['$scope', 'branchesService',
-			($scope: IBranchesCtrlScope, branchesService: overwatch.git.IBranchesService) => {
+		app.controller('branchesCtrl', ['$scope', 'branches',
+			($scope: IBranchesCtrlScope, branches: Array<git.IBranch>) => {
 			$scope.viewModel = <any>{};
-			branchesService.getBranches().then((branches) => {
-				$scope.viewModel.branches = branches;
-			});
+			$scope.viewModel.branches = branches;
 		}]);
 
 		export interface IBranchesCtrlScope {

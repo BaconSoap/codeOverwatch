@@ -1,11 +1,26 @@
-angular.module('templates-main', ['templates/git/branchesCtrl.tpl.html', 'templates/index.tpl.html', 'templates/layout/header.tpl.html', 'templates/layout/sidebar.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+angular.module('templates-main', ['templates/git/branchCtrl.tpl.html', 'templates/git/branchesCtrl.tpl.html', 'templates/index.tpl.html', 'templates/layout/header.tpl.html', 'templates/layout/sidebar.tpl.html', 'templates/overview.tpl.html', 'templates/overview/overviewCtrl.tpl.html', 'templates/state1.tpl.html', 'templates/state2.tpl.html']);
+
+angular.module("templates/git/branchCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/git/branchCtrl.tpl.html",
+    "<div>\n" +
+    "	View <a href=\"{{viewModel.branch._links.html}}\">{{viewModel.branch.name}}</a> on Github <br/>\n" +
+    "	<label for=\"forUser\">\n" +
+    "		Filter by user:\n" +
+    "	</label>\n" +
+    "\n" +
+    "	<input type=\"text\" id=\"forUser\" name=\"forUser\" ng-model=\"viewModel.username\" size=\"50\"> <button ng-click=\"filterCommits()\">Filter</button>\n" +
+    "	<ul>\n" +
+    "		<li ng-repeat=\"commit in commits\">{{commit.commit.message}}</li>\n" +
+    "	</ul>\n" +
+    "</div>");
+}]);
 
 angular.module("templates/git/branchesCtrl.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/git/branchesCtrl.tpl.html",
-    "<div data-ng-controller=\"branchesCtrl\">\n" +
+    "<div>\n" +
     "	<ul>\n" +
     "		<li ng-repeat=\"branch in viewModel.branches\">\n" +
-    "			{{branch.name}}\n" +
+    "			<a ui-sref=\"branch({branchName: branch.urlName})\">{{branch.name}}</a>\n" +
     "		</li>\n" +
     "	</ul>\n" +
     "</div>");
@@ -13,7 +28,6 @@ angular.module("templates/git/branchesCtrl.tpl.html", []).run(["$templateCache",
 
 angular.module("templates/index.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/index.tpl.html",
-    "<h2 class=\"sub-header\">Section title</h2>\n" +
     "<div ui-view></div>");
 }]);
 

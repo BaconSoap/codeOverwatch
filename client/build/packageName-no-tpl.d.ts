@@ -35,9 +35,15 @@ declare module overwatch {
 declare module overwatch {
     module git {
         interface IBranch {
+            name: string;
+            urlName?: string;
         }
         interface IBranchesService {
             getBranches: () => ng.IPromise<IBranch[]>;
+            getBranchInfo: (branchName: string) => ng.IPromise<IBranch>;
+            getCommits: (branchName: string, username: string) => ng.IPromise<ICommit[]>;
+        }
+        interface ICommit {
         }
     }
 }
@@ -48,6 +54,19 @@ declare module overwatch {
         }
         interface IBranchesViewModel {
             branches: IBranch[];
+        }
+    }
+}
+declare module overwatch {
+    module git {
+        interface IBranchCtrlScope {
+            viewModel: IBranchViewModel;
+            filterCommits: () => void;
+            commits: ICommit[];
+        }
+        interface IBranchViewModel {
+            branch: IBranch;
+            username: any;
         }
     }
 }

@@ -9,3 +9,5 @@
 ///<reference path="git/branchesService.ts" />
 
 ///<reference path="git/branchesCtrl.ts" />
+
+///<reference path="git/branchCtrl.ts" />
