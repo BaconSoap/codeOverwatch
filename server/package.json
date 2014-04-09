@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/BaconSoap/codeOverwatch",
   "dependencies": {
-    "github": "~0.1.15"
+    "github": "git://github.com/BaconSoap/node-github.git#repos_getCommits_author",
+    "log4js": "~0.6.13",
+    "express": "~3.5.1"
   }
 }
