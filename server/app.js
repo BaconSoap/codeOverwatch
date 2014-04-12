@@ -1,6 +1,8 @@
 var log4js = require('log4js');
 log4js.replaceConsole();
 
+var db = require('./db.js');
+
 var express = require('express');
 var http = require('http');
 var fs = require('fs');

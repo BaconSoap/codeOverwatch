@@ -20,6 +20,7 @@
     "github": "git://github.com/BaconSoap/node-github.git#repos_getCommits_author",
     "log4js": "~0.6.13",
     "express": "~3.5.1",
-    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master",
+    "q": "~1.0.1"
   }
 }
